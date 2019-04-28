@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="bms.device.webapi.test.FunctionTestActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="32px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="name"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="128px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="text"
+                android:text="admin" />
+
+            <TextView
+                android:layout_width="32px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="passwd"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/edit_password"
+                android:layout_width="128px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="text"
+                android:text="12345678" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8px"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/test_login_button"
+                        android:layout_width="220px"
+                        android:layout_height="110px"
+                        android:text="login" />
+
+                    <Button
+                        android:id="@+id/test_scan_result_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Scan Results" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8px"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/test_hello_button"
+                        android:layout_width="220px"
+                        android:layout_height="110px"
+                        android:text="hello" />
+
+                    <Button
+                        android:id="@+id/test_get_wifi_network_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Get WiFi Network" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8px"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/test_change_password_button"
+                        android:layout_width="220px"
+                        android:layout_height="110px"
+                        android:text="Change Password" />
+
+                    <Button
+                        android:id="@+id/test_post_wifi_network_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Post WiFi Network" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8px"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/test_delete_password_button"
+                        android:layout_width="220px"
+                        android:layout_height="110px"
+                        android:text="Delete Password" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>
