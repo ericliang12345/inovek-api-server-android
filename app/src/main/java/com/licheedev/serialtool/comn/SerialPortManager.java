@@ -181,4 +181,11 @@ public class SerialPortManager {
             }
         });
     }
+
+    /**
+     * get cmd port data
+     * */
+    public String getReceiveData(){
+        return mReadThread.getReceiveData();
+    }
 }

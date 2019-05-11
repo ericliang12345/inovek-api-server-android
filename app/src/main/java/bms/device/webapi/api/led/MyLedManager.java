@@ -67,7 +67,7 @@ public class MyLedManager {
         String blueHex=Integer.toHexString(status.blue);
         String ledHex = new StringBuilder(redHex).append(greenHex).append(blueHex).toString();
 
-        StringBuilder str = new StringBuilder("ff550124"); // LED Start Code & Cmd
+        StringBuilder str = new StringBuilder(mLedCmd); // LED Start Code & Cmd
         for(int i=0; i<12; i++)
             str.append(ledHex);
 

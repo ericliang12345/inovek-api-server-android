@@ -17,6 +17,7 @@ public class SerialReadThread extends Thread {
     private static final String TAG = "SerialReadThread";
 
     private BufferedInputStream mInputStream;
+    private String mReadData = "";
 
     public SerialReadThread(InputStream is) {
         mInputStream = new BufferedInputStream(is);
@@ -65,7 +66,15 @@ public class SerialReadThread extends Thread {
     private void onDataReceive(byte[] received, int size) {
         // TODO: 2018/3/22 解决粘包、分包等
         String hexStr = ByteUtil.bytes2HexStr(received, 0, size);
+        mReadData = hexStr;
         LogManager.instance().post(new RecvMessage(hexStr));
+    }
+
+    /**
+     * get cmd port data
+    * */
+    public String getReceiveData() {
+        return mReadData;
     }
 
     /**

@@ -37,6 +37,8 @@ public class NFCManager {
     private Device mDevice;
     private boolean mOpened = false;
     private NFC_Status mNFC_Status;
+    private String mNFCReadCmd = "50000222105232";
+    private String mNoCardReturn = "f00001228457";
 
     private NFCManager(Context context) {
         initDevice();
@@ -62,15 +64,25 @@ public class NFCManager {
 
         if( mNFC_Status.reader == false ) return mNFC_Status;
 
-        StringBuilder str = new StringBuilder("ff550124"); // Query NFC Command
+        StringBuilder str = new StringBuilder(mNFCReadCmd); // Query NFC Command
 
         String sendData = str.toString();
         Log.i(TAG, sendData);
         SerialPortManager.instance().sendCommand(sendData);
+        String recvData = SerialPortManager.instance().getReceiveData();
+        try {
+            Thread.sleep(1000); // wait 1 second
+        } catch (InterruptedException e) {
 
-
+        }
         // Wait a 10 ms wait NFC reader to reply its data
-
+        if(recvData.equals(mNoCardReturn)) {
+            mNFC_Status.card = false;
+            mNFC_Status.data = "";
+        }else {
+            mNFC_Status.card = true;
+            mNFC_Status.data = recvData;
+        }
         return mNFC_Status;
     }
 
