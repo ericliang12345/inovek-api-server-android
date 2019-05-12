@@ -5,7 +5,9 @@ import java.util.List;
 
 import bms.device.webapi.api.Api;
 
-final class ScanResult {
+
+
+final class ScanResult2 {
     String BSSID;
     String SSID;
     String capabilities;
@@ -14,10 +16,10 @@ final class ScanResult {
     long timestamp;
 }
 
-final class ScanResultsResponse {
+final class ScanResultsResponse2 {
     Object[] results;
 
-    ScanResultsResponse(Object[] results) {
+    ScanResultsResponse2(Object[] results) {
         this.results = results;
     }
 }
@@ -25,7 +27,12 @@ final class ScanResultsResponse {
 public final class ApiScanResults extends Api {
 
     public static String name() {
-        return "/wifi/scan_results";
+        return "/wifi-test/scan_results";
+    }
+
+    @Override
+    public boolean isAuthRequired() {
+        return false;
     }
 
 
@@ -35,7 +42,17 @@ public final class ApiScanResults extends Api {
             return new Output(Result.BAD_REQUEST);
         }
 
+        MyWiFiManager.getInstance().startWiFiScan();
+
         List<ScanResult> results = new ArrayList<>();
+
+        try {
+            Thread.sleep(10000); // wait 10 second
+        } catch (InterruptedException e) {
+
+        }
+
+
         for (android.net.wifi.ScanResult scanResult: MyWiFiManager.getInstance().getScanResults()) {
             ScanResult result = new ScanResult();
             result.BSSID = scanResult.BSSID;

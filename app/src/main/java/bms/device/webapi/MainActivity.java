@@ -15,7 +15,7 @@ import javax.net.ssl.SSLContext;
 
 import bms.device.webapi.api.info.DevInfoManager;
 import bms.device.webapi.api.led.MyLedManager;
-
+import bms.device.webapi.api.nfc.NFCManager;
 import bms.device.webapi.api.wifi.MyWiFiManager;
 import bms.device.webapi.test.FunctionTestActivity;
 import bms.device.webapi.user.User;
@@ -85,6 +85,7 @@ public class MainActivity extends Activity {
         DevInfoManager.getInstance(this);
         MyWiFiManager.getInstance(this);
         MyLedManager.getInstance(this);
+        NFCManager.getInstance(this);
 
         UserManager userManager = UserManager.getInstance();
         userManager.setStorage(new UserStorageV1(this));
@@ -96,7 +97,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
-        checkAllowAllPermission();
+        //checkAllowAllPermission();
     }
 
     @Override

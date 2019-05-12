@@ -13,7 +13,7 @@ class Hello {
 public final class ApiHello extends Api {
 
     public static String name() {
-        return "/hello1";
+        return "/hello";
     }
 
     @Override

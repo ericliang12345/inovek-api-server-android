@@ -67,7 +67,7 @@ public class SerialReadThread extends Thread {
         // TODO: 2018/3/22 解决粘包、分包等
         String hexStr = ByteUtil.bytes2HexStr(received, 0, size);
         mReadData = hexStr;
-        LogManager.instance().post(new RecvMessage(hexStr));
+        //LogManager.instance().post(new RecvMessage(hexStr));
     }
 
     /**

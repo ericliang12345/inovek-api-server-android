@@ -12,6 +12,7 @@ import bms.device.webapi.api.Api;
 import bms.device.webapi.api.ApiHello;
 import bms.device.webapi.api.info.ApiInfoManager;
 import bms.device.webapi.api.led.ApiLedManager;
+import bms.device.webapi.api.nfc.ApiNFC;
 import bms.device.webapi.api.ApiOAuth2Token;
 import bms.device.webapi.api.ApiUserPassword;
 import bms.device.webapi.api.wifi.ApiScanResults;
@@ -70,6 +71,7 @@ final class ApiV1Nanolet implements RouterNanoHTTPD.UriResponder {
         addApi(ApiWiFiNetwork.name(), ApiWiFiNetwork.class);
         addApi(ApiInfoManager.name(), ApiInfoManager.class);
         addApi(ApiLedManager.name(), ApiLedManager.class);
+        addApi(ApiNFC.name(), ApiNFC.class);
     }
 
     private Api find(String uri) {

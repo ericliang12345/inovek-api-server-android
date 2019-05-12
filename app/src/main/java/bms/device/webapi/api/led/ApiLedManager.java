@@ -56,7 +56,6 @@ public final class ApiLedManager extends Api {
 
             if(uri.equals(this.name())) // {"results": [ "front_led" ] }
                 return new Output(Result.OK, gson.toJson( new LEDInfoResultsResponse(led_list)));
-            // need to read from
             else if(uri.equals("/led/front_led")) {
                 LedStatus ledStatus = MyLedManager.getInstance().getLedStatus();
                 return new Output(Result.OK, gson.toJson(new LedStatusResponse(ledStatus.red, ledStatus.green, ledStatus.blue)));

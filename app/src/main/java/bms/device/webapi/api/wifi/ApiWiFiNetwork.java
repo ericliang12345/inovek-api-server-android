@@ -16,6 +16,11 @@ import java.util.List;
 import bms.device.webapi.api.Api;
 import bms.device.webapi.api.net.IpConfiguration;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bms.device.webapi.api.Api;
+
 final class MyWifiConfiguration {
     String BSSID;
     String FQDN;
@@ -47,6 +52,30 @@ final class GetWiFiNetworkResponse {
     }
 }
 
+final class WiFiStatus {
+    String value;
+
+    WiFiStatus(String state){ this.value = state; }
+
+}
+
+final class ScanResult {
+    String BSSID;
+    String SSID;
+    String capabilities;
+    int frequency;
+    int level;
+    long timestamp;
+}
+
+final class ScanResultsResponse {
+    Object[] results;
+
+    ScanResultsResponse(Object[] results) {
+        this.results = results;
+    }
+}
+
 final class PostWiFiNetworkRequest {
     String method;
     String ssid;
@@ -64,15 +93,53 @@ final class PostWiFiNetworkRequest {
 public final class ApiWiFiNetwork extends Api {
 
     public static String name() {
-        return "/wifi/network";
+        return "/wifi";
+    }
+
+    @Override
+    public boolean isAuthRequired() {
+        return false;
     }
 
     @Override
     public Output execute(Action action, String uri, String json) {
         if (action == Action.READ) {
-            return readWifiConfigurations();
+            if(uri.equals("/wifi/network"))
+                return readWifiConfigurations();
+            else if( uri.equals("/wifi/state")) {
+                if( MyWiFiManager.getInstance().getWiFiState() == true )
+                    return new Output(Result.OK, gson.toJson(new WiFiStatus("enable")));
+                else
+                    return new Output(Result.OK, gson.toJson(new WiFiStatus("disable")));
+            }else if( uri.equals("/wifi/scan_results")) {
+                MyWiFiManager.getInstance().startWiFiScan();
+
+                List<ScanResult> results = new ArrayList<>();
+
+                try {
+                    Thread.sleep(10000); // wait 10 second
+                } catch (InterruptedException e) {
+
+                }
+
+
+                for (android.net.wifi.ScanResult scanResult: MyWiFiManager.getInstance().getScanResults()) {
+                    ScanResult result = new ScanResult();
+                    result.BSSID = scanResult.BSSID;
+                    result.SSID = scanResult.SSID;
+                    result.capabilities = scanResult.capabilities;
+                    result.frequency = scanResult.frequency;
+                    result.level = scanResult.level;
+                    result.timestamp = scanResult.timestamp;
+
+                    results.add(result);
+                }
+
+                return new Output(Result.OK, gson.toJson(new ScanResultsResponse(results.toArray())));
+            }
+
         } else if (action == Action.WRITE) {
-            return null;
+            //return new Output(Result.BAD_REQUEST);
         }
 
         return new Output(Result.BAD_REQUEST);
